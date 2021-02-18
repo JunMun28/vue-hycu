@@ -11,9 +11,6 @@
                   <div class="webpage-name display-1 text-white">
                     HYCU EXTRACTION
                   </div>
-                  <!-- <p class="text-lead text-white">
-                    Please insert following info.
-                  </p> -->
                 </b-col>
               </b-row>
             </div>
@@ -72,7 +69,7 @@
                     >
                       <b-form-textarea
                         id="textarea"
-                        v-model="text"
+                        v-model="lotIds"
                         placeholder="Enter FIDs or Lot number in slash format..."
                         rows="2"
                         max-rows="8"
@@ -90,7 +87,7 @@
 
                       <b-form-textarea
                         id="textarea"
-                        v-model="text"
+                        v-model="hycuIds"
                         placeholder="(Optional) Enter targeted trend/series..."
                         rows="2"
                         max-rows="8"
@@ -117,7 +114,7 @@
                           type="primary"
                           native-type="submit"
                           class="my-4"
-                          @click="$router.push('result-table-raw-data')"
+                          @click="$router.push('result')"
                           >Submit</base-button
                         >
                       </div>
@@ -149,6 +146,8 @@ export default {
   },
   data() {
     return {
+      lotIds: "",
+      hycuIds: "",
       showMenu: false,
       menuTransitionDuration: 250,
       pageTransitionDuration: 200,
@@ -171,7 +170,26 @@ export default {
       return `${this.$route.name} Page`;
     },
   },
+  created: function () {
+    // axios.get("https://jsonplaceholder.typicode.com/todos");
+    // this.$get("/", this.setChairs, {});
+    // this.$get("products/chairs/42", null);
+    // this.$post("products/chairs/", this.addMessage, { name: "Red Chair" });
+    // this.$put("products/chairs/42", this.addMessage, { three: 3 });
+    // this.$delete("products/chairs/42", this.addMessage, { three: 3 });
+    // console.log(this.$store.state.count);
+  },
   methods: {
+    setChairs: function (res) {
+      // this.chairs = res;
+      // console.log(res);
+    },
+    handleError: function (err) {
+      this.message = err;
+    },
+    addMessage: function (res) {
+      this.messages.push(res.message);
+    },
     toggleNavbar() {
       document.body.classList.toggle("nav-open");
       this.showMenu = !this.showMenu;
@@ -256,8 +274,5 @@ $scaleSize: 0.8;
 .main-content .zoomOut {
   animation-name: zoomOut8;
 }
-
-// .webpage-name {
-//   // font-family: sans-serif;
-// }
 </style>
+
